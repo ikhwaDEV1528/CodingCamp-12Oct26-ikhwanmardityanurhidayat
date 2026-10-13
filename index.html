@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Dashboard — Ikhwan Marditya Nurhidayat</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS (Wajib mengarah ke folder css/) -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="min-h-screen bg-slate-900 text-white">
+
+  <!-- NAVBAR -->
+  <nav class="bg-slate-800/80 backdrop-blur border-b border-slate-700 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <span class="text-blue-400 text-xl">⚡</span>
+      <span class="font-bold text-lg tracking-tight">Life Dashboard</span>
+    </div>
+    
+  </nav>
+
+  <!-- MAIN GRID LAYOUT -->
+  <main class="max-w-5xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- SECTION 1: GREETING & JAM REAL-TIME -->
+    <section id="greeting-section"
+             class="md:col-span-2 bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-lg text-center">
+      <p id="greeting-text"
+         class="text-blue-400 font-semibold text-lg uppercase tracking-widest mb-2">
+        Selamat Datang
+      </p>
+      <div id="clock-display"
+           class="text-6xl md:text-8xl font-extrabold tracking-tight tabular-nums mb-3">
+        <span id="clock-hours">00</span><span class="animate-pulse text-blue-400">:</span><span id="clock-minutes">00</span><span class="animate-pulse text-blue-400">:</span><span id="clock-seconds">00</span>
+      </div>
+      <p id="date-display"
+         class="text-slate-400 text-base md:text-lg font-medium">
+        Loading tanggal...
+      </p>
+    </section>
+
+    <!-- SECTION 2: POMODORO TIMER -->
+    <section id="pomodoro-section"
+             class="bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-lg flex flex-col items-center gap-6">
+      <div>
+        <p class="text-rose-400 font-semibold text-sm uppercase tracking-widest text-center mb-1">Pomodoro Timer</p>
+        <h2 class="text-white font-bold text-xl text-center">Fokus 25 Menit</h2>
+      </div>
+      <div id="pomodoro-display"
+           class="text-7xl font-extrabold tabular-nums text-white tracking-tight">
+        <span id="pomo-minutes">25</span>:<span id="pomo-seconds">00</span>
+      </div>
+      <p id="pomodoro-status"
+         class="text-slate-400 text-sm font-medium">
+        Siap untuk memulai
+      </p>
+      <div id="pomodoro-controls" class="flex items-center gap-3">
+        <button id="pomo-start"
+                class="px-6 py-2.5 bg-rose-500 hover:bg-rose-600 text-white font-semibold rounded-xl transition-colors shadow">
+          ▶ Start
+        </button>
+        <button id="pomo-pause"
+                class="px-6 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-xl transition-colors shadow">
+          ⏸ Pause
+        </button>
+        <button id="pomo-reset"
+                class="px-6 py-2.5 bg-slate-600 hover:bg-slate-500 text-white font-semibold rounded-xl transition-colors shadow">
+          ↺ Reset
+        </button>
+      </div>
+      <div class="w-full bg-slate-700 rounded-full h-2">
+        <div id="pomo-progress"
+             class="bg-rose-500 h-2 rounded-full transition-all duration-1000"
+             style="width: 100%">
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: TO-DO LIST -->
+    <section id="todo-section"
+             class="bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-lg flex flex-col gap-5">
+      <div>
+        <p class="text-emerald-400 font-semibold text-sm uppercase tracking-widest mb-1">To-Do List</p>
+        <h2 class="text-white font-bold text-xl">Daftar Tugas</h2>
+      </div>
+      <div id="todo-input-area" class="flex gap-2">
+        <input
+          id="todo-input"
+          type="text"
+          placeholder="Tambahkan tugas baru..."
+          class="flex-1 bg-slate-700 border border-slate-600 text-white placeholder-slate-400 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition"
+        />
+        <button
+          id="todo-add-btn"
+          class="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition-colors shadow text-sm whitespace-nowrap">
+          + Tambah
+        </button>
+      </div>
+      <div id="todo-filters" class="flex gap-2">
+        <button data-filter="all"
+                class="todo-filter-btn active-filter px-3 py-1 rounded-lg text-xs font-medium bg-emerald-500 text-white transition">
+          Semua
+        </button>
+        <button data-filter="active"
+                class="todo-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-700 text-slate-400 hover:text-white transition">
+          Aktif
+        </button>
+        <button data-filter="done"
+                class="todo-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-700 text-slate-400 hover:text-white transition">
+          Selesai
+        </button>
+      </div>
+      <ul id="todo-list"
+          class="flex flex-col gap-2 max-h-60 overflow-y-auto pr-1">
+        <li class="text-slate-500 text-sm text-center py-4" id="todo-empty-state">
+          Belum ada tugas. Tambahkan sekarang!
+        </li>
+      </ul>
+      <p id="todo-count" class="text-slate-500 text-xs">
+        0 tugas tersisa
+      </p>
+    </section>
+
+    <!-- SECTION 4: QUICK LINKS -->
+    <section id="quicklinks-section"
+             class="md:col-span-2 bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-lg">
+      <div class="mb-6">
+        <p class="text-violet-400 font-semibold text-sm uppercase tracking-widest mb-1">Quick Links</p>
+        <h2 class="text-white font-bold text-xl">Pintasan Website</h2>
+      </div>
+      <div id="quicklinks-grid"
+           class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+        <!-- Links akan dibuat oleh script.js -->
+      </div>
+      <div id="quicklinks-add-area" class="mt-6 flex flex-wrap gap-2 items-center">
+        <input id="ql-name-input"
+               type="text"
+               placeholder="Nama link..."
+               class="bg-slate-700 border border-slate-600 text-white placeholder-slate-400 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 transition w-36" />
+        <input id="ql-url-input"
+               type="url"
+               placeholder="https://..."
+               class="bg-slate-700 border border-slate-600 text-white placeholder-slate-400 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 transition w-52" />
+        <button id="ql-add-btn"
+                class="px-5 py-2 bg-violet-500 hover:bg-violet-600 text-white font-semibold rounded-xl transition-colors shadow text-sm">
+          + Tambah Link
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="text-center text-slate-500 text-sm py-6 border-t border-slate-800">
+    &copy; 2026 Life Dashboard &mdash; Ikhwan Marditya Nurhidayat
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
